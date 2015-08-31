@@ -1,6 +1,8 @@
 angular.module('frontend', ['ui.bootstrap','ui.utils','ui.router','ngAnimate']);
 
-angular.module('frontend').config(function($stateProvider, $urlRouterProvider) {
+angular.module('frontend').config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+
+    /*$locationProvider.html5Mode(true);*/
 
     $stateProvider.state('register', {
         url: '/register',
