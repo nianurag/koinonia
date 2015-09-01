@@ -13,7 +13,8 @@
 
 (defapi api-routes
   {:formats [:json-kw]}
-  (GET* "/" [] (ok {:reply "Hello World"}))
+  (GET* "/" [] (ok {:reply "Hello World from GET"}))
+  (POST* "/" [] (ok {:reply "Hello World from POST"}))
   (route/not-found "Not Found")
   )
 

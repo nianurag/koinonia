@@ -1,13 +1,19 @@
-angular.module('frontend').controller('HomeCtrl',function($scope,$http){
+angular.module('frontend').controller('HomeCtrl', function($scope, $http) {
 
-console.log("Home controller has been successfully loaded");
+    var baseURL = 'http://localhost:9090/';
 
-$http.get('http://localhost:9090/').
-  then(function(response) {
-    console.log("Hey it was successfully requested" + JSON.stringify(response.data.reply));
-    $scope.response = response.data.reply;
-  }, function(response) {
-    console.log("Some error happened");
-  });
+    $http.get(baseURL).
+    then(function(response) {
+        $scope.getresponse = response.data.reply;
+    }, function(response) {
+        console.log("Some error happened");
+    });
+
+    $http.post(baseURL).
+    then(function(response) {
+        $scope.postresponse = response.data.reply;
+    }, function(response) {
+        console.log("Some error happened");
+    });
 
 });
