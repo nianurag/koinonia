@@ -6,3 +6,14 @@ client/_SpecRunner.html
 client/.DS_Store/*
 client/test-results.xml
 client/bower_components/*
+**/target
+**/classes
+**/checkouts
+**/pom.xml
+**/pom.xml.asc
+**/*.jar
+**/*.class
+**/.lein-*
+**/.nrepl-port
+**/.hgignore
+**/.hg/
