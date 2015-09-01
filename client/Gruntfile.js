@@ -40,7 +40,7 @@ module.exports = function (grunt) {
     connect: {
       main: {
         options: {
-          port: 8080
+          port: 9080
         }
       }
     },
