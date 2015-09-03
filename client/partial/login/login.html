@@ -1,5 +1,5 @@
 <div class="col-md-12" ng-controller="LoginCtrl">
-    <h1 class="text-center logo-heading">Koinonia</h1>
+    <a href="/#/"><h1 class="text-center logo-heading">Koinonia</h1></a>
     <div class="row text-center">
         <div class="col-xs-4 col-xs-offset-4">
             <div class="panel-heading"><strong>Login Now</strong></div>
@@ -17,14 +17,19 @@
                     <button type="submit" class="btn btn-primary" ng-click="login()">Login</button>
                 </div>
             </div>
+            <div ng-show="loginResponse" class="alert alert-danger alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <strong>{{loginResponse}}</strong>
+                <!-- <strong>{{login.nick}}</strong> -->
+            </div>
         </div>
     </div>
     <div class="row">
-                <div class="col-xs-8 col-xs-offset-2 text-center">
-                    <h4>Don't have an account?</h4>
-                    <a href="/#/register">
-                        <button class="btn btn-lg btn-warning">Register Now</button>
-                    </a>
-                </div>
-            </div>
+        <div class="col-xs-8 col-xs-offset-2 text-center">
+            <h4>Don't have an account?</h4>
+            <a href="/#/register">
+                <button class="btn btn-lg btn-warning">Register Now</button>
+            </a>
+        </div>
+    </div>
 </div>

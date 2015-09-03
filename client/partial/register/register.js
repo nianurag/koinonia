@@ -13,11 +13,12 @@ angular.module('frontend').controller('RegisterCtrl', function($scope,$http) {
         }).
         then(function(response) {
             var obj = JSON.parse(response.data.reply);
-            $scope.loginResponse = obj;
+            $scope.registerResponse = obj;
             //alert($scope.loginResponse);
             //$state.go('home');
         }, function(response) {
-            alert("Some Error happened");
+            //alert("Some Error happened");
+            $scope.registerResponse = "Some Error happened";
         });
     };
 
