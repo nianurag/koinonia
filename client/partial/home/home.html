@@ -1,4 +1,8 @@
-<div class="col-md-12" ng-controller="HomeCtrl">
-<h1>{{getresponse}}</h1>
-<h6>{{postresponse}}</h6>
+<div class="col-xs-12" ng-controller="HomeCtrl">
+    <h1>Koinonia</h1>
+    <input type="text" ng-model="user.nick">
+    <input type="password" ng-model="user.password">
+    <button type="submit" ng-click="register()">Register</button>
+
+    <h1>The information entered is {{user.nick}} and {{user.password}}</h1>
 </div>
