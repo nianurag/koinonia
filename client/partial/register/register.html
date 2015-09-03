@@ -5,16 +5,18 @@
             <div class="panel-heading"><strong>Register Below</strong></div>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <strong>Nick</strong>
-                    <br>
-                    <input type="text" ng-model="register.nick">
-                    <br>
-                    <strong>Password</strong>
-                    <br>
-                    <input type="password" ng-model="register.password">
-                    <br>
-                    <br>
-                    <button type="submit" class="btn btn-primary" ng-click="register()">Register</button>
+                    <form>
+                        <strong>Nick</strong>
+                        <br>
+                        <input type="text" ng-model="register.nick" required>
+                        <br>
+                        <strong>Password</strong>
+                        <br>
+                        <input type="password" ng-model="register.password" required>
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-primary" ng-click="register()">Register</button>
+                    </form>
                 </div>
             </div>
             <div ng-show="registerResponse" class="alert alert-success alert-dismissible fade in" role="alert">
