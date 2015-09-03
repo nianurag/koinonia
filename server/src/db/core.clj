@@ -18,6 +18,10 @@
 
 (defn login-db [nick password]
   (println "login-db was called")
-  (first (db/query mysql-db ["select *from User where nick = ? and password = ?" nick password] :id :lastLogin)))
+  (get (first (db/query mysql-db ["select * from User where nick = ? and password = ?" nick password])) :sessionid))
+
+(defn get-sessionId [nick]
+  (println "get-sessionId was called")
+  (get (first (db/query mysql-db ["select sessionId from User where nick = ?" nick])) :sessionid))
 
 

@@ -9,7 +9,7 @@
             [clojure.java.io :refer [resource]]
             [clojure.data.json :as json]
             ;[noir.io :as io]
-            ;[noir.response :as response]
+            [noir.response :as response]
             [clojure.pprint :as print]
             [db.core :as db]))
 
@@ -21,17 +21,26 @@
           (assoc-in [:headers "Access-Control-Allow-Methods"] "GET, PUT, PATCH, POST, DELETE, OPTIONS")
           (assoc-in [:headers "Access-Control-Allow-Headers"] "Authorization, Content-Type")))))
 
+(defn set-cookie
+  "Sets a cookie on the response. Requires the handler to be wrapped in the
+  wrap-cookies middleware."
+  [resp name value & [opts]]
+  (assoc-in resp [:cookies name] (merge {:value value} opts)))
+
 (defn json-reply [fn-reply]
   (print/pprint (str "json-reply was called to deliver " fn-reply))
   (ok {:reply (json/write-str (str fn-reply))}))
 
 (defn login-handler [nick password]
   (print/pprint (str "login-handler was called" nick password))
-  (let [return (db/login-db nick password)]
-    (print/pprint (str "The return value from the db is" return))
-    (if (some? return) return (json-reply "Fail"))
-    (if (not (some? return)) return (json-reply "Success"))
+  (let [session (db/login-db nick password)]
+    (print/pprint (str "The session id of the user is " session))
+    (if (some? session) session (json-reply "Fail"))
+    (if (not (some? session)) session (json-reply "Success"))
     ))
+
+;(defn store-cookies []
+ ; )
 
 (defn register-handler [nick password]
   (try
@@ -39,10 +48,13 @@
     (catch Exception e))
   (json-reply (str nick " has successfully registered")))
 
+(defn print-request [request]
+  (print/pprint request))
+
 (defapi api-routes
   {:formats [:json-kw]}
   (GET* "/" [] (ok {:reply "Hello World from GET"}))
-  (POST* "/" [] (ok {:reply "Hello World from POST"}))
+  (POST* "/" [] (print-request))
   (POST* "/login" {params :params}
          (let [nick (:nick params)
                password (:password params)]
@@ -55,6 +67,7 @@
            (println nick password)
            (register-handler nick password)
            ))
+  ;(POST* "/savesession" {params :params })
   (route/not-found "Not Found")
   )
 

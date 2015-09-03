@@ -8,7 +8,7 @@
                  ;[hiccup "1.0.5"]
                  [metosin/compojure-api "0.22.2"]
                  ;[cheshire "5.5.0"]
-                 ;[lib-noir "0.9.9"]
+                 [lib-noir "0.9.9"]
                  [buddy "0.6.1"]
                  [org.clojure/java.jdbc "0.4.1"]
                  [mysql/mysql-connector-java "5.1.36"]
