@@ -1,4 +1,30 @@
 <div class="col-md-12" ng-controller="LoginCtrl">
-<h1>Login</h1>
-
+    <h1 class="text-center logo-heading">Koinonia</h1>
+    <div class="row text-center">
+        <div class="col-xs-4 col-xs-offset-4">
+            <div class="panel-heading"><strong>Login Now</strong></div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <strong>Nick</strong>
+                    <br>
+                    <input type="text" ng-model="login.nick">
+                    <br>
+                    <strong>Password</strong>
+                    <br>
+                    <input type="password" ng-model="login.password">
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary" ng-click="login()">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 text-center">
+                    <h4>Don't have an account?</h4>
+                    <a href="/#/register">
+                        <button class="btn btn-lg btn-warning">Register Now</button>
+                    </a>
+                </div>
+            </div>
 </div>

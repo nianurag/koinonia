@@ -4,23 +4,122 @@
 @fa-font-path: "bower_components/font-awesome/fonts";
 
 /* Component LESS */
+
 @import "partial/register/register.less";
 @import "partial/login/login.less";
 @import "partial/messages/messages.less";
 @import "partial/home/home.less";
+
 /* Add Component LESS Above */
 
+
 /* Required for Angular UI Bootstrap */
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+    cursor: pointer;
+}
+
 
 /* Personal preference for BS modal.  The LESS below makes the backdrop white and
    causes the modal to fade in rather than slide in. */
+
 //@modal-backdrop-bg: white;
 //.modal {
-//	&.fade {
-//		.transition(opacity .3s);
-//	}
-//	&.fade .modal-dialog {
-//		.translate(0,0);
-//	}
+//  &.fade {
+//    .transition(opacity .3s);
+//  }
+//  &.fade .modal-dialog {
+//    .translate(0,0);
+//  }
 //}
+
+/*********************** Fonts ****************************/
+
+@font-face {
+    font-family: 'PreludeWGL';
+    src: url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-Light.WOFF') format('woff'), url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-Light.ttf') format('truetype');
+    ;
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PreludeWGL';
+    src: url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-LightItalic.WOFF') format('woff'), url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'PreludeWGL';
+    src: url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-Medium.WOFF') format('woff'), url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-Medium.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PreludeWGL';
+    src: url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-MediumItalic.WOFF') format('woff'), url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-MediumItalic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'PreludeWGL';
+    src: url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-Bold.WOFF') format('woff'), url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PreludeWGL';
+    src: url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-BoldItalic.WOFF') format('woff'), url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-BoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'PreludeWGL';
+    src: url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-Black.WOFF') format('woff'), url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PreludeWGL';
+    src: url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-BlackItalic.WOFF') format('woff'), url('//static.gozoomo.com/web-assets/fonts/PreludeWGL/PreludeWGL-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+.logo-heading {
+    margin: 50px 50px;
+    font: 400 130px/0.8 'Great Vibes', Helvetica, sans-serif;
+    color: #fff;
+    text-shadow: 4px 4px 3px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    background: linear-gradient( limegreen, transparent), linear-gradient( 90deg, skyblue, transparent), linear-gradient( -90deg, coral, transparent) no-repeat;
+    background-blend-mode: screen;
+    margin-bottom: 300px;
+    font-family: 'PreludeWGL', sans-serif;
+}
+
+.panel {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-radius: 0px;
+}
+
+.panel-heading {
+    opacity: 0.7;
+    background-color: #f2f2f2;
+}
+
+button {
+    width: 150px;
+}
