@@ -16,3 +16,8 @@
                :password password
                :sessionId (sha1 (str nick password))}))
 
+(defn login-db [nick password]
+  (println "login-db was called")
+  (first (db/query mysql-db ["select *from User where nick = ? and password = ?" nick password] :id :lastLogin)))
+
+

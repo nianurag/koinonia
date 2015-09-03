@@ -21,21 +21,34 @@
           (assoc-in [:headers "Access-Control-Allow-Methods"] "GET, PUT, PATCH, POST, DELETE, OPTIONS")
           (assoc-in [:headers "Access-Control-Allow-Headers"] "Authorization, Content-Type")))))
 
-(defn login [request]
-  (print/pprint request)
-  (ok {:reply (json/write-str (request :params))}))
+(defn json-reply [fn-reply]
+  (print/pprint (str "json-reply was called to deliver " fn-reply))
+  (ok {:reply (json/write-str (str fn-reply))}))
+
+(defn login-handler [nick password]
+  (print/pprint (str "login-handler was called" nick password))
+  (let [return (db/login-db nick password)]
+    (print/pprint (str "The return value from the db is" return))
+    (if (some? return) return (json-reply "Fail"))
+    (if (not (some? return)) return (json-reply "Success"))
+    ))
 
 (defn register-handler [nick password]
   (try
     (db/register-db nick password)
     (catch Exception e))
-      (ok {:reply (json/write-str (str nick " has successfully registered"))}))
+  (json-reply (str nick " has successfully registered")))
 
 (defapi api-routes
   {:formats [:json-kw]}
   (GET* "/" [] (ok {:reply "Hello World from GET"}))
   (POST* "/" [] (ok {:reply "Hello World from POST"}))
-  (POST* "/login" [] login)
+  (POST* "/login" {params :params}
+         (let [nick (:nick params)
+               password (:password params)]
+           (println nick password)
+           (login-handler nick password)
+           ))
   (POST* "/register" {params :params}
          (let [nick (:nick params)
                password (:password params)]
