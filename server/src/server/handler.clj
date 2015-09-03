@@ -5,12 +5,13 @@
             [compojure.api.sweet :refer :all]
             [ring.util.http-response :refer [ok]]
             [org.httpkit.server :refer [run-server]]
-            [hiccup.core :as hiccup :refer [html]]
+            ;[hiccup.core :as hiccup :refer [html]]
             [clojure.java.io :refer [resource]]
             [clojure.data.json :as json]
-            [noir.io :as io]
-            [noir.response :as response]
-            [clojure.pprint :as print]))
+            ;[noir.io :as io]
+            ;[noir.response :as response]
+            [clojure.pprint :as print]
+            [db.core :as db]))
 
 (defn cors-mw [handler]
   (fn [request]
@@ -24,11 +25,23 @@
   (print/pprint request)
   (ok {:reply (json/write-str (request :params))}))
 
+(defn register-handler [nick password]
+  (try
+    (db/register-db nick password)
+    (catch Exception e))
+      (ok {:reply (json/write-str (str nick " has successfully registered"))}))
+
 (defapi api-routes
   {:formats [:json-kw]}
   (GET* "/" [] (ok {:reply "Hello World from GET"}))
   (POST* "/" [] (ok {:reply "Hello World from POST"}))
   (POST* "/login" [] login)
+  (POST* "/register" {params :params}
+         (let [nick (:nick params)
+               password (:password params)]
+           (println nick password)
+           (register-handler nick password)
+           ))
   (route/not-found "Not Found")
   )
 
