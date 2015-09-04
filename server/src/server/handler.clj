@@ -49,10 +49,9 @@
 
 (defn login-handler [nick password]
   (print/pprint (str "login-handler was called" nick password))
-  (let [session (db/login-db nick password)]
-    (print/pprint (str "The session id of the user is " session))
-    (if (some? session) session (json-reply "Fail"))
-    (if (not (some? session)) session (json-reply "Success"))
+  (let [exists (db/login-db nick password)]
+    (print/pprint (str "Does the user account exists?" exists))
+    (if (not (zero? exists)) (json-reply "Success") (json-reply "Fail"))
     ))
 
 (defn register-handler [nick password]

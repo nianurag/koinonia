@@ -9,16 +9,28 @@
                :user "root"
                :password "shoot"})
 
+(defn current-time []
+  (let [date (new java.util.Date)]
+    (let [sdf (new java.text.SimpleDateFormat "yyyyMMddHHmmss")]
+      (.format sdf (.getTime date)))))
+
 (defn register-db [nick password]
   (println "register-db was called")
   (db/insert! mysql-db :User
               {:nick nick
                :password (sha224 password)
-               :sessionId (sha224 (str nick password))}))
+               :sessionId (sha224 (str nick (quot (System/currentTimeMillis) 1000) password))}))
+
+; (defn login-db [nick password]
+;   (println "login-db was called")
+;   (get (first (db/update! mysql-db ["select * from User where nick = ? and password = ?" nick (sha224 password)])) :sessionid))
 
 (defn login-db [nick password]
   (println "login-db was called")
-  (get (first (db/query mysql-db ["select * from User where nick = ? and password = ?" nick (sha224 password)])) :sessionid))
+  (first (db/update! mysql-db :User
+                          {:sessionId (sha224 (str nick (quot (System/currentTimeMillis) 1000) password))
+                           :lastLogin (current-time)}
+                          ["nick = ?" nick])))
 
 (defn get-sessionId [nick]
   (println "get-sessionId was called")
