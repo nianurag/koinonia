@@ -28,12 +28,12 @@
 (defn calm-handler [^Exception e data request]
   (enhance-your-calm {:message (.getMessage e), :data data}))
 
-(defn store-cookies [sessionId]
+(defn store-cookies [sessionId nick]
   (print/pprint (str "store cookies was called with session id ->" sessionId))
   {:status 200
    :headers {"Content-Type" "text/html"}
    :body (str "{\"reply\" : \"Cookie Success\"}" )
-   :cookies {"sessionId" {:value sessionId :max-age 86400}}}
+   :cookies {"usessionId" {:value (str sessionId "+" nick) :max-age 86400}}}
   )
 
 (defn delete-cookies [sessionId]
@@ -41,7 +41,7 @@
   {:status 200
    :headers {"Content-Type" "text/html"}
    :body (str "{\"reply\" : \"Cookie delete Success\"}" )
-   :cookies {"sessionId" {:value sessionId :max-age 0}}})
+   :cookies {"usessionId" {:value sessionId :max-age 0}}})
 
 (defn json-reply [fn-reply]
   (print/pprint (str "json-reply was called to deliver " fn-reply))
@@ -88,7 +88,7 @@
                password (:password params)
                session (db/get-sessionId nick)]
            (println nick password session)
-           (store-cookies session)
+           (store-cookies session nick)
            ))
   (POST* "/destroysession" {params :params}
          (let [nick (:nick params)
