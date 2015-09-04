@@ -13,12 +13,12 @@
   (println "register-db was called")
   (db/insert! mysql-db :User
               {:nick nick
-               :password password
+               :password (sha1 password)
                :sessionId (sha1 (str nick password))}))
 
 (defn login-db [nick password]
   (println "login-db was called")
-  (get (first (db/query mysql-db ["select * from User where nick = ? and password = ?" nick password])) :sessionid))
+  (get (first (db/query mysql-db ["select * from User where nick = ? and password = ?" nick (sha1 password)])) :sessionid))
 
 (defn get-sessionId [nick]
   (println "get-sessionId was called")
