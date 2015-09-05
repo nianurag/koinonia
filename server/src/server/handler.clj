@@ -62,7 +62,8 @@
 (defn register-handler [nick password]
   (try
     (db/register-db nick password)
-    (catch Exception e))
+    (catch Exception e)
+    (throw e))
   (json-reply (str nick " has successfully registered")))
 
 (defn print-request [req]
@@ -96,7 +97,7 @@
   (POST* "/destroysession" {params :params}
          (let [nick (:nick params)
                session (db/get-session nick)]
-           (if (some? session) (delete-cookies session) (json-reply "Opps"))
+           (if (some? session) (delete-cookies session) (json-reply "Oops"))
            ))
   (route/not-found "Not Found")
   )
