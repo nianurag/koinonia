@@ -90,14 +90,13 @@
   (POST* "/savesession" {params :params}
          (let [nick (:nick params)
                password (:password params)]
-               (println nick password)
-               (session-handler nick password)
-               ))
+           (println nick password)
+           (session-handler nick password)
+           ))
   (POST* "/destroysession" {params :params}
          (let [nick (:nick params)
                session (db/get-session nick)]
-           (println nick session)
-           (delete-cookies session)
+           (if (some? session) (delete-cookies session) (json-reply "Opps"))
            ))
   (route/not-found "Not Found")
   )
