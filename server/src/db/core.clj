@@ -25,6 +25,8 @@
 ;   (println "login-db was called")
 ;   (get (first (db/update! mysql-db ["select * from User where nick = ? and password = ?" nick (sha224 password)])) :sessionid))
 
+
+; TODO Add Expiry,Wrong attempts, lockdown, IP address, browser signature
 (defn login-db [nick password]
   (println "login-db was called")
   (first (db/update! mysql-db :User
