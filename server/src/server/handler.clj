@@ -51,7 +51,7 @@
   (print/pprint (str "login-handler was called" nick password))
   (let [exists (db/login-db nick password)]
     (print/pprint (str "Does the user account exists?" exists))
-    (if (not (zero? exists)) (json-reply "Success") (json-reply "Fail"))
+    (if (zero? exists) (json-reply "Fail") (json-reply "Success"))
     ))
 
 (defn register-handler [nick password]

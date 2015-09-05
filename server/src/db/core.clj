@@ -30,7 +30,7 @@
   (first (db/update! mysql-db :User
                           {:sessionId (sha224 (str nick (quot (System/currentTimeMillis) 1000) password))
                            :lastLogin (current-time)}
-                          ["nick = ?" nick])))
+                          ["nick = ? and password = ?" nick (sha224 password)])))
 
 (defn get-sessionId [nick]
   (println "get-sessionId was called")
