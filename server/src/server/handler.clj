@@ -31,7 +31,7 @@
 (defn store-cookies [sessionId nick]
   (print/pprint (str "store cookies was called with session id ->" sessionId))
   {:status 200
-   :headers {"Content-Type" "text/html"}
+   :headers {"Content-Type" "application/json"}
    :body (str "{\"reply\" : \"Cookie Success\"}" )
    :cookies {"usessionId" {:value (str sessionId "+" nick) :max-age 86400}}}
   )
@@ -39,7 +39,7 @@
 (defn delete-cookies [sessionId]
   (print/pprint (str "delete cookies was called with session id ->" sessionId))
   {:status 200
-   :headers {"Content-Type" "text/html"}
+   :headers {"Content-Type" "application/json"}
    :body (str "{\"reply\" : \"Cookie delete Success\"}" )
    :cookies {"usessionId" {:value sessionId :max-age 0}}})
 
