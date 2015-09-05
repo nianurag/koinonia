@@ -34,8 +34,12 @@
                            :lastLogin (current-time)}
                           ["nick = ? and password = ?" nick (sha224 password)])))
 
-(defn get-sessionId [nick]
+(defn get-sessionId [nick password]
   (println "get-sessionId was called")
+  (get (first (db/query mysql-db ["select sessionId from User where nick = ? and password = ?" nick (sha224 password)])) :sessionid))
+
+(defn get-session [nick]
+  (println "get-session was called")
   (get (first (db/query mysql-db ["select sessionId from User where nick = ?" nick])) :sessionid))
 
 

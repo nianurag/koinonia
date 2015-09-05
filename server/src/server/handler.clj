@@ -53,6 +53,11 @@
     (print/pprint (str "Does the user account exists?" exists))
     (if (zero? exists) (json-reply "Fail") (json-reply "Success"))
     ))
+(defn session-handler [nick password]
+  (print/pprint (str "session-handler was called" nick password))
+  (let [session (db/get-sessionId nick password)]
+    (if (some? session) (store-cookies session nick) (json-reply "Fail"))
+    ))
 
 (defn register-handler [nick password]
   (try
@@ -84,14 +89,13 @@
            ))
   (POST* "/savesession" {params :params}
          (let [nick (:nick params)
-               password (:password params)
-               session (db/get-sessionId nick)]
-           (println nick password session)
-           (store-cookies session nick)
-           ))
+               password (:password params)]
+               (println nick password)
+               (session-handler nick password)
+               ))
   (POST* "/destroysession" {params :params}
          (let [nick (:nick params)
-               session (db/get-sessionId nick)]
+               session (db/get-session nick)]
            (println nick session)
            (delete-cookies session)
            ))
