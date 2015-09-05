@@ -62,9 +62,12 @@
 (defn register-handler [nick password]
   (try
     (db/register-db nick password)
-    (catch Exception e)
-    (throw e))
-  (json-reply (str nick " has successfully registered")))
+    (json-reply (str nick " has successfully registered"))
+    (catch Exception e
+      ;(str "Caught Exception ->" (.printStackTrace e))
+      (json-reply "Wrong parameters or user is already registered")
+      ))
+  )
 
 (defn print-request [req]
   (print/pprint req)
