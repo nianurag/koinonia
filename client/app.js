@@ -20,6 +20,10 @@ angular.module('frontend').config(function($stateProvider, $urlRouterProvider, $
         url: '/',
         templateUrl: 'partial/home/home.html'
     });
+    $stateProvider.state('rememberme', {
+        url: '/login/rememberme/',
+        templateUrl: 'partial/login/rememberme/rememberme.html'
+    });
     /* Add New States Above */
     $urlRouterProvider.otherwise('/');
 

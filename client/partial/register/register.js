@@ -18,7 +18,7 @@ angular.module('frontend').controller('RegisterCtrl', function($scope,$http) {
             //$state.go('home');
         }, function(response) {
             //alert("Some Error happened");
-            $scope.registerResponse = "Some Error happened";
+            $scope.registerResponse = "Some error happened";
         });
     };
 
