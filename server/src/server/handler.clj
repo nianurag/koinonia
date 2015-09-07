@@ -1,16 +1,16 @@
 (ns server.handler
   (:require [compojure.handler :refer [site]] ; form, query params decode; cookie; session, etc
             [compojure.route :as route]
-            [compojure.api.core]
+            ;[compojure.api.core]
             [compojure.api.sweet :refer :all]
             [ring.util.http-response :refer [ok internal-server-error enhance-your-calm]]
             [org.httpkit.server :refer [run-server]]
-            [hiccup.core :as hiccup :refer [html]]
+            ;[hiccup.core :as hiccup :refer [html]]
             [clojure.java.io :refer [resource]]
             [clojure.data.json :as json]
-            [noir.io :as io]
-            [noir.cookies :refer [put!]]
-            [ring.util.response :as response]
+            ;[noir.io :as io]
+            ;[noir.cookies :refer [put!]]
+            ;[ring.util.response :as response]
             [clojure.pprint :as print]
             [db.core :as db]))
 
